@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  node-server: 
+    container_name: node # ตั้งชื่อ container
+    build: . # ตั้งตำแหน่ง dockerfile
+    ports:
+      - "3000:3000" # map port 3000 ให้เปิดให้ภายนอกเข้าถึง เหมือน -p 
+  
+  db:
+    image: mysql:latest
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: root # กำหนด user ของ root mysql
+      MYSQL_DATABASE: Helpdesk # กำหนด database เริ่มต้นของ mysql
+    ports: 
+      - "3306:3306"
+    volumes:
+      # กำหนดชื่อ volume ว่า mysql_data และเก็บไว้ที่ /var/lib/mysql 
+      - mysql_data:/var/lib/mysql #map path ภายในไว้กับ volume
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: db # ระบุ host ที่จะให้ phpmyadmin ไปจัดการ ซึ่งสามารถใส่เป็นชื่อ container name (db) ได้เลย
+      PMA_PORT: 3306 # ระบุ port ของ Database
+      PMA_USER: root # ระบุ user ของ Database
+      PMA_PASSWORD: root # ระบุ password ของ Database
+    ports:
+      - "8080:80"
+    depends_on:
+      - db # depends_on คือการระบุว่าเซอร์วิส phpmyadmin ต้องรอให้เซอร์วิส mysql ทำงานเสร็จก่อน
+
+# กำหนด volume สำหรับเก็บข้อมูลฐานข้อมูล 
+volumes:
+  mysql_data: # เก็บข้อมูลไว้ใน volumes mysql_data
