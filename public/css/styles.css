@@ -1,0 +1,148 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* สไตล์ของ header */
+header {
+    background-color: #1E201E;
+    color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    color: #fff;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* สไตล์ของ main-container */
+.main-container {
+    display: flex;
+    flex: 1;
+    margin-top: 60px; /* เพิ่ม margin-top เพื่อไม่ให้ทับกับ header */
+}
+
+/* สไตล์ของ sidebar */
+.sidebar {
+    width: 200px;
+    background-color: #333;
+    padding-top: 20px;
+    flex-shrink: 0;
+    height: calc(100vh - 60px); /* ให้ sidebar สูงเต็มหน้าจอ */
+    position: fixed; /* ทำให้ sidebar อยู่คงที่ */
+    top: 56px; /* เพิ่ม top เพื่อไม่ให้ทับกับ header */
+    left: 0;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    text-align: left;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    background-color: #575757;
+}
+
+.sidebar ul li a i {
+    margin-right: 10px;
+}
+
+/* สไตล์ของ content */
+.content {
+    margin-left: 220px; /* เพิ่ม margin-left เพื่อไม่ให้ทับกับ sidebar */
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px auto; /* เพิ่ม margin auto เพื่อให้อยู่ตรงกลาง */
+    max-width: 800px; /* ลดขนาดของฟอร์ม */
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

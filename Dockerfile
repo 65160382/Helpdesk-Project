@@ -9,8 +9,8 @@ COPY ./package.json ./
 
 RUN npm install
 
-# คัดลอกไฟล์จากโฟลดเดอร์มาบน container
-COPY ./app.js ./
+# คัดลอกไฟล์ทั้งหมดจากโฟลเดอร์ปัจจุบันไปยังโฟลเดอร์ /usr/src/app ใน Docker container 
+COPY . .
 
 EXPOSE 3000
 
