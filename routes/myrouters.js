@@ -10,8 +10,8 @@ router.get('/', (req, res) => {
 
 // Route เพื่อรับข้อมูลจากฟอร์ม
 router.post('/submit-ticket', (req, res) => {
-    const { title, category, name, priority, description } = req.body;
-    const newTicket = { title, category, name, priority, description };
+    const { title,name, priority, description } = req.body;
+    const newTicket = { title,name, priority, description };
     tickets.push(newTicket);
     res.redirect('/tickets');
 });

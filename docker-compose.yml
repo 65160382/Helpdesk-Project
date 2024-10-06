@@ -3,10 +3,15 @@ version: '3'
 services:
   node-server: 
     container_name: node # ตั้งชื่อ container
-    build: . # ตั้งตำแหน่ง dockerfile
+    build: . # ตั้งตำแหน่ง Dockerfile
     ports:
-      - "3000:3000" # map port 3000 ให้เปิดให้ภายนอกเข้าถึง เหมือน -p 
-  
+      - "3000:3000" # map port 3000 ให้เปิดให้ภายนอกเข้าถึง
+    volumes:
+      - .:/usr/src/app # แมปโฟลเดอร์โค้ดในเครื่องเข้ากับ container
+      - /usr/src/app/node_modules # กันไม่ให้แมป node_modules ของ local
+    environment:
+      - NODE_ENV=development # ตั้งค่า environment variable
+
   db:
     image: mysql:latest
     container_name: db
@@ -30,8 +35,7 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      - db # depends_on คือการระบุว่าเซอร์วิส phpmyadmin ต้องรอให้เซอร์วิส mysql ทำงานเสร็จก่อน
+      - db # ระบุว่า phpmyadmin ขึ้นหลังจาก db 
 
-# กำหนด volume สำหรับเก็บข้อมูลฐานข้อมูล 
 volumes:
   mysql_data: # เก็บข้อมูลไว้ใน volumes mysql_data
