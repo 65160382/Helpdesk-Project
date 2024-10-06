@@ -20,15 +20,17 @@ header {
 }
 
 .header-container {
-    width: 80%;
+    width: 100%; /* ให้กว้างเต็มจอเพื่อชิดขอบซ้าย */
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* จัดตำแหน่งให้ชิดซ้าย */
     align-items: center;
+
 }
 
 header h1 {
     margin: 0;
+    margin-left: 20px;
     color: #fff;
 }
 
@@ -40,7 +42,7 @@ nav ul {
 }
 
 nav ul li {
-    margin-left: 20px;
+    margin-left: 10px; /* ลด margin-left เพื่อขยับไอคอนมาทางซ้าย */
 }
 
 nav ul li a {
@@ -51,6 +53,13 @@ nav ul li a {
 nav ul li a:hover {
     text-decoration: underline;
 }
+
+/* ปรับขนาด icon profile*/
+.custom-size {
+    font-size: 27px; /* หรือขนาดที่คุณต้องการ */
+    margin-right: 30px;
+}
+
 
 /* สไตล์ของ main-container */
 .main-container {
@@ -95,8 +104,8 @@ nav ul li a:hover {
     margin-right: 10px;
 }
 
-/* สไตล์ของ content */
-.content {
+/* สไตล์ของ form-content */
+.form-content {
     margin-left: 220px; /* เพิ่ม margin-left เพื่อไม่ให้ทับกับ sidebar */
     flex: 1;
     padding: 20px;
@@ -104,7 +113,10 @@ nav ul li a:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     margin: 20px auto; /* เพิ่ม margin auto เพื่อให้อยู่ตรงกลาง */
-    max-width: 800px; /* ลดขนาดของฟอร์ม */
+    max-width: 700px; 
+    width: 100%; /* ให้ฟอร์มกว้างเต็มที่ภายใน max-width */
+    max-height: 700px; 
+    overflow-y: auto; /* เพิ่มการเลื่อนดูเนื้อหาภายในฟอร์ม */
 }
 
 h1 {
@@ -136,7 +148,7 @@ select {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #3ec227;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -144,5 +156,5 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #308d1f;
 }

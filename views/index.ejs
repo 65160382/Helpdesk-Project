@@ -11,20 +11,20 @@
     <%- include('partials/header') %>
     <div class="main-container">
         <%- include('partials/sidebar') %>
-        <div class="content">
+        <div class="form-content">
             <h1>Submit a new request</h1>
             <form action="/submit-ticket" method="POST">
                 <div class="form-group">
                     <label for="Title">Title:</label>
-                    <input type="text" id="title" name="title" required>
+                    <input type="text" id="title" name="title" placeholder="Enter title" required>
                 </div>
                 <div class="form-group">
                     <label for="Category">Category:</label>
-                    <input type="text" id="Category" name="Category" required>
+                    <input type="text" id="category" name="category" placeholder="Enter category" required>
                 </div>
                 <div class="form-group">
                     <label for="Name">Name:</label>
-                    <input type="text" id="Name" name="Name" required>
+                    <input type="text" id="name" name="name" placeholder="Enter fullname" required>
                 </div>
                 <div class="form-group">
                     <label for="priority">Priority:</label>
@@ -35,11 +35,12 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="issue">Issue:</label>
-                    <textarea id="issue" name="issue" rows="4" required></textarea>
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="4" placeholder="Enter description" required></textarea>
                 </div>
                 <button type="submit">Submit</button>
             </form>
+
         </div>
     </div>
 </body>
