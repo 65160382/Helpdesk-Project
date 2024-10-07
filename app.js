@@ -1,7 +1,10 @@
 const express = require('express');
 const path = require('path');
+
+
 const ticketRoutes = require('./routes/ticketRoutes') //import module file router
-// const router = require('./routes/myroutes') //import module file router
+const authRoutes = require('./routes/authRoutes')
+
 
 const app = express();
 const port = 3000;
@@ -13,7 +16,8 @@ app.use(express.urlencoded({extended:true}));
 
 // ใช้ router
 app.use('/', ticketRoutes);  // เชื่อมต่อ routes
-// app.use(router);
+app.use(authRoutes);
+
 
 
 app.listen(port,()=>{

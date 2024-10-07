@@ -25,7 +25,6 @@ header {
     display: flex;
     justify-content: space-between; /* จัดตำแหน่งให้ชิดซ้าย */
     align-items: center;
-
 }
 
 header h1 {
@@ -34,11 +33,17 @@ header h1 {
     color: #fff;
 }
 
+nav {
+    display: flex;
+    align-items: center;
+}
+
 nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
+    align-items: center;
 }
 
 nav ul li {
@@ -48,16 +53,19 @@ nav ul li {
 nav ul li a {
     color: #fff;
     text-decoration: none;
+    margin-right: 50px; 
+    display: flex;
+    align-items: center;
 }
 
 nav ul li a:hover {
     text-decoration: underline;
 }
 
-/* ปรับขนาด icon profile*/
+/* ปรับขนาด icon profile */
 .custom-size {
     font-size: 27px; /* หรือขนาดที่คุณต้องการ */
-    margin-right: 30px;
+    margin-right: 10px;
 }
 
 

@@ -2,48 +2,49 @@
 .table-content {
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    max-width: 1000px; /* ขนาดที่กว้างกว่าสำหรับตาราง */
-    width: 100%; /* ให้ตารางกว้างเต็มที่ภายใน max-width */
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-width: 1000px;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
-    font-size: 18px;
+    font-size: 16px;
     text-align: left;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     overflow: hidden;
 }
 
 thead tr {
-    background-color: #1E201E;
+    background-color: #343a40;
     color: #ffffff;
     text-align: left;
     font-weight: bold;
 }
 
 th, td {
-    padding: 12px 15px;
+    padding: 15px 20px;
     border-bottom: 1px solid #dddddd;
 }
 
 tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+    background-color: #f8f9fa;
 }
 
 tbody tr:hover {
-    background-color: #f1f1f1;
+    background-color: #e9ecef;
 }
 
 tbody tr:last-of-type {
-    border-bottom: 2px solid #1E201E;
+    /* border-bottom: 2px solid #343a40; */
 }
 
 tbody td {
-    color: #333;
+    color: #495057;
 }
