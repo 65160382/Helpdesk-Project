@@ -10,7 +10,18 @@ services:
       - .:/usr/src/app # แมปโฟลเดอร์โค้ดในเครื่องเข้ากับ container
       - /usr/src/app/node_modules # กันไม่ให้แมป node_modules ของ local
     environment:
-      - NODE_ENV=development # ตั้งค่า environment variable
+       # กำหนด host ของ MySQL 
+      DB_HOST: db
+      # กำหนด user ของ MySQL
+      DB_USER: user
+      # กำหนด password ของ MySQL
+      DB_PASSWORD: password
+      # กำหนดชื่อฐานข้อมูล 
+      DB_NAME: Helpdesk
+    # depends_on คือการระบุว่าเซอร์วิส webapp ต้องรอให้เซอร์วิส mysql ทำงานเสร็จก่อน
+    depends_on:
+      # ระบุเซอร์วิสที่ต้องรอ
+      - db
 
   db:
     image: mysql:latest
@@ -18,6 +29,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root # กำหนด user ของ root mysql
       MYSQL_DATABASE: Helpdesk # กำหนด database เริ่มต้นของ mysql
+      MYSQL_USER: user # เพิ่ม user ตรงนี้
+      MYSQL_PASSWORD: password # เพิ่ม password ตรงนี้
     ports: 
       - "3306:3306"
     volumes:

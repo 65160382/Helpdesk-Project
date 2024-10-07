@@ -21,6 +21,7 @@
                         <th>Name</th>
                         <th>Priority</th>
                         <th>Description</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,11 +31,13 @@
                             <td><%= ticket.name %></td>
                             <td><%= ticket.priority %></td>
                             <td><%= ticket.description %></td>
+                            <td><%= ticket.status %></td>
                         </tr>
-                    <% }) %>
+                    <% }); %>
                 </tbody>
             </table>
         </div>
     </div>
 </body>
 </html>
+
