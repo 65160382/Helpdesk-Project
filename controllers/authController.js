@@ -28,11 +28,7 @@ exports.getRegisterPage = (req, res) => {
 
 // จัดการการ Register
 exports.register = async (req, res) => {
-    const { name, email, password, confirm_password } = req.body;
-
-    if (password !== confirm_password) {
-        return res.status(400).send('Passwords do not match');
-    }
+    const { name, email, password } = req.body;
 
     // สร้างผู้ใช้ใหม่
     const newUser = new User(name, email, password);
