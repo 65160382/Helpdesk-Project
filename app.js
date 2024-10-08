@@ -11,8 +11,11 @@ const port = 3000;
 
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views')); //อ้างอิง views ที่อยู่ใน floder views
+
 app.use(express.static(path.join(__dirname,'public'))); //อ้างอิงไฟล์ static ใน floder public
 app.use(express.urlencoded({extended:true}));
+// กำหนด express ให้อ่านข้อมูลที่ส่งมาในรูปแบบของ json คือ ข้อมูลที่ส่งมาจาก API
+app.use(express.json());
 
 // ใช้ router
 app.use('/', ticketRoutes);  // เชื่อมต่อ routes

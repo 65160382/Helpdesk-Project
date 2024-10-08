@@ -1,8 +1,9 @@
 const pool = require('../config/database');
 
 class Ticket {
-    constructor(title, name, priority, description) {
+    constructor(title, date, priority, description) {
         this.title = title;
+        this.date = date;
         this.priority = priority;
         this.description = description;
         this.status = 'new'; // กำหนดสถานะเริ่มต้น
@@ -10,8 +11,8 @@ class Ticket {
 
     // ฟังก์ชันเพื่อเพิ่มคำร้องขอใหม่
     async save() {
-        const sql = `INSERT INTO ticket (title, priority, description, status) VALUES (?, ?, ?, ?)`;
-        const [result] = await pool.execute(sql, [this.title, this.priority, this.description, this.status]);
+        const sql = `INSERT INTO ticket (title, date, priority, description, status) VALUES (?, ?, ?, ?, ?)`;
+        const [result] = await pool.execute(sql, [this.title, this.date, this.priority, this.description, this.status]);
         return result;
     }
 

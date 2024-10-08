@@ -8,8 +8,9 @@ exports.getForm = (req, res) => {
 // ฟังก์ชันสร้างคำร้องขอใหม่
 exports.createTicket = async (req, res) => {
     try {
-        const { title, name, priority, description } = req.body;  // ดึงข้อมูลจากฟอร์ม
-        const ticket = new Ticket(title, name, priority, description);  // สร้าง instance ของ Ticket
+        const { title, date, priority, description } = req.body;  // ดึงข้อมูลจากฟอร์ม
+        const formattedDate = new Date(date).toISOString().split('T',1)[0];  // จัดรูปแบบวันที่เป็น YYYY-MM-DD
+        const ticket = new Ticket(title, formattedDate, priority, description);  // สร้าง instance ของ Ticket พร้อมกับวันที่ที่จัดรูปแบบแล้ว
         await ticket.save();  // เรียกใช้ฟังก์ชัน save() เพื่อเพิ่มข้อมูลในฐานข้อมูล
         res.redirect('tickets');  // เปลี่ยนเส้นทางไปยังหน้าแสดงรายการคำร้องขอ
     } catch (error) {
@@ -17,6 +18,8 @@ exports.createTicket = async (req, res) => {
         res.status(500).send('Error creating ticket');  // จัดการข้อผิดพลาด
     }
 };
+
+
 
 // ฟังก์ชันดึงรายการคำร้องขอทั้งหมด
 exports.getAllTickets = async (req, res) => {

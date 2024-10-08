@@ -28,11 +28,21 @@ exports.getRegisterPage = (req, res) => {
 
 // จัดการการ Register
 exports.register = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { firstname, lastname, email, phone, username, password } = req.body;
+
+    // ตรวจสอบให้แน่ใจว่าทุกค่ามีอยู่
+    if (!firstname || !lastname || !email || !phone || !username || !password) {
+        return res.status(400).json({ message: 'All fields are required' });
+    }
 
     // สร้างผู้ใช้ใหม่
-    const newUser = new User(name, email, password);
-    await newUser.save();
-
-    res.redirect('/login');
+    const newUser = new User(firstname, lastname, email, phone, username, password);
+    try {
+        await newUser.save();
+        res.redirect('/login');
+    } catch (error) {
+        console.error(error); // แสดงข้อผิดพลาดในคอนโซล
+        res.status(500).json({ message: 'Error creating user', error });
+    }
 };
+
