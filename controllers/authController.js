@@ -1,4 +1,4 @@
-// controllers/authController.js
+const bcrypt = require('bcryptjs'); 
 const User = require('../models/userModel');
 
 // แสดงหน้า Login
@@ -8,18 +8,32 @@ exports.getLoginPage = (req, res) => {
 
 // จัดการการ Login
 exports.login = async (req, res) => {
-    const { email, password } = req.body;
-    
-    // ตรวจสอบผู้ใช้งานจากฐานข้อมูล (สมมุติว่ามี model User)
-    const user = await User.findByEmail(email);
+    // ดึงค่า username และ password จาก request body
+    const { username, password } = req.body;
 
-    if (user && user.password === password) {
-        // ถ้ารหัสผ่านถูกต้องให้เข้าสู่ระบบ
-        res.redirect('/dashboard'); // นำผู้ใช้ไปหน้าหลักหรือ dashboard
-    } else {
-        res.status(401).send('Invalid credentials');
+    // ตรวจสอบว่ามีค่า username หรือ password หรือไม่
+    if (!username || !password) {
+        return res.status(400).json({ message: 'Username and password are required' });
     }
+
+    // ค้นหาผู้ใช้โดยใช้ username
+    const user = await User.findByUsername(username);
+    
+    // ตรวจสอบว่าพบผู้ใช้หรือไม่
+    if (!user) {
+        return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    // ตรวจสอบ password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+        return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    // หากเข้าสู่ระบบสำเร็จ
+    res.redirect('/dashboard');
 };
+
 
 // แสดงหน้า Register
 exports.getRegisterPage = (req, res) => {

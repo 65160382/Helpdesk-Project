@@ -17,57 +17,119 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-}
-
-.header-container {
-    width: 100%; /* ให้กว้างเต็มจอเพื่อชิดขอบซ้าย */
+  }
+  
+  .header-container {
+    width: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between; /* จัดตำแหน่งให้ชิดซ้าย */
+    justify-content: space-between;
     align-items: center;
-}
-
-header h1 {
+  }
+  
+  header h1 {
     margin: 0;
     margin-left: 20px;
     color: #fff;
-}
-
-nav {
+  }
+  
+  nav {
     display: flex;
     align-items: center;
-}
-
-nav ul {
+  }
+  
+  nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     align-items: center;
-}
-
-nav ul li {
-    margin-left: 10px; /* ลด margin-left เพื่อขยับไอคอนมาทางซ้าย */
-}
-
-nav ul li a {
+  }
+  
+  nav ul li {
+    margin-left: 10px;
+  }
+  
+  nav ul li a {
     color: #fff;
     text-decoration: none;
     margin-right: 50px; 
     display: flex;
     align-items: center;
-}
-
-nav ul li a:hover {
+  }
+  
+  nav ul li a:hover {
     text-decoration: underline;
-}
-
-/* ปรับขนาด icon profile */
-.custom-size {
-    font-size: 27px; /* หรือขนาดที่คุณต้องการ */
+  }
+  
+  /* ปรับขนาด icon profile */
+  .custom-size {
+    font-size: 27px;
     margin-right: 10px;
-}
+  }
+  
+  /* สไตล์สำหรับ dropdown menu */
+  .navbar-dropdown {
+    margin-right: auto;
+    margin-left: 30px;
+  }
+  
+  .navbar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  .nav-item {
+    position: relative;
+  }
+  
+  .nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+  }
+  
+  .nav-link:hover,
+  .nav-link:focus {
+    background-color: #555;
+  }
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  .dropdown-menu .dropdown-item {
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-menu .dropdown-item:hover,
+  .dropdown-menu .dropdown-item:focus {
+    background-color: #f1f1f1;
+  }
+  
+  .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
 
+  /* ปรับระยะห่างของไอคอน caret-down */
+ .nav-item.dropdown a .fas.fa-chevron-down {
+    margin-left: 10px;
+ }
 
 /* สไตล์ของ main-container */
 .main-container {
