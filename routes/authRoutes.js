@@ -8,6 +8,8 @@ router.get('/login', authController.getLoginPage);
 // จัดการการล็อกอิน
 router.post('/login', authController.login);
 
+router.get('/logout',authController.logout)
+
 // แสดงหน้า Register
 router.get('/register', authController.getRegisterPage);
 

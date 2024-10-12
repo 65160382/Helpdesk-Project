@@ -16,7 +16,13 @@
         <nav>
             <ul>
                 <i class="fas fa-user-circle custom-size"></i>
-                <li><a href="/login">Login</a></li> 
+                <% if (username) { %> 
+                    <!-- แสดงชื่อผู้ใช้เมื่อมีการล็อกอิน -->
+                    <li><%= username %></li>
+                <% } else { %> 
+                    <!-- แสดงปุ่ม login ถ้ายังไม่ได้ล็อกอิน -->
+                    <li><a href="/login">Login</a></li>
+                <% } %>
             </ul>
         </nav>
     </div>

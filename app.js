@@ -1,8 +1,11 @@
+//import package module
 const express = require('express');
 const path = require('path');
+const session = require('express-session')
 
 
-const ticketRoutes = require('./routes/ticketRoutes') //import module file router
+//import module file router
+const ticketRoutes = require('./routes/ticketRoutes') 
 const authRoutes = require('./routes/authRoutes')
 
 
@@ -14,6 +17,27 @@ app.set('views',path.join(__dirname,'views')); //อ้างอิง views ท
 
 app.use(express.static(path.join(__dirname,'public'))); //อ้างอิงไฟล์ static ใน floder public
 app.use(express.urlencoded({extended:true}));
+
+// ตั้งค่า session middleware
+app.use(session({
+    secret: 'mysession', // ใช้คีย์ลับสำหรับการเข้ารหัส session
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false } // ถ้าใช้ https ให้เปลี่ยนเป็น true
+}));
+
+app.use((req, res, next) => {
+    // ถ้าผู้ใช้ล็อกอิน ให้ส่ง username ไปกับ response
+    if (req.session.user) {
+        res.locals.username = req.session.user.username;
+    } else {
+        res.locals.username = null; // ตั้งค่าเป็น null ถ้าไม่มีผู้ใช้ล็อกอิน
+    }
+    next();
+});
+
+
+
 // กำหนด express ให้อ่านข้อมูลที่ส่งมาในรูปแบบของ json คือ ข้อมูลที่ส่งมาจาก API
 app.use(express.json());
 

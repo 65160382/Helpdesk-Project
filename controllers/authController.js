@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs'); 
 const User = require('../models/userModel');
+// const session = require('express-session')
 
 // แสดงหน้า Login
 exports.getLoginPage = (req, res) => {
@@ -30,8 +31,15 @@ exports.login = async (req, res) => {
         return res.status(401).json({ message: 'Invalid credentials' });
     }
 
+     // เก็บข้อมูลผู้ใช้ใน session
+     req.session.user = {
+        id: user.id,
+        username: user.username
+    };
+
+    console.log('User logged in successfully')
     // หากเข้าสู่ระบบสำเร็จ
-    res.redirect('/dashboard');
+    res.redirect('/');
 };
 
 
@@ -53,10 +61,23 @@ exports.register = async (req, res) => {
     const newUser = new User(firstname, lastname, email, phone, username, password);
     try {
         await newUser.save();
+        console.log('User registered successfully');
         res.redirect('/login');
     } catch (error) {
         console.error(error); // แสดงข้อผิดพลาดในคอนโซล
         res.status(500).json({ message: 'Error creating user', error });
     }
+};
+
+// log out ทำลาย session ทิ้ง
+exports.logout = (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).send('Error logging out');
+        }
+        
+        res.clearCookie('connect.sid'); // ลบ cookie ที่เก็บ session ID
+        res.redirect('/');
+    });
 };
 

@@ -48,12 +48,13 @@ header {
   
   nav ul li {
     margin-left: 10px;
+    margin-right: 50px; 
   }
   
   nav ul li a {
     color: #fff;
     text-decoration: none;
-    margin-right: 50px; 
+    /* margin-right: 50px;  */
     display: flex;
     align-items: center;
   }
