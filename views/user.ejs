@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/user.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>User</title>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <div class="table-container">
+      <%- include('partials/sidebar') %>
+      <div class="container">
+          <h1>User Management</h1>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Username</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% users.forEach(user => { %>
+                <tr>
+                  <td><%= user.id %></td>
+                  <td><%= user.firstname %> <%= user.lastname %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.phone %></td>
+                  <td><%= user.username %></td>
+                  <td>
+                    <a href="/users/<%= user.id %>/edit" class="button edit">Edit</a>
+                    <a href="/users/<%= user.id %>/delete" class="button delete">Delete</a>
+                </td>
+                </tr>
+              <% }) %>
+            </tbody> 
+          </table>
+        </div>
+    </div>    
+</body>
+</html>

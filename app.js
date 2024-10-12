@@ -7,6 +7,7 @@ const session = require('express-session')
 //import module file router
 const ticketRoutes = require('./routes/ticketRoutes') 
 const authRoutes = require('./routes/authRoutes')
+const userRoutes = require('./routes/userRoutes')
 
 
 const app = express();
@@ -44,6 +45,7 @@ app.use(express.json());
 // ใช้ router
 app.use('/', ticketRoutes);  // เชื่อมต่อ routes
 app.use(authRoutes);
+app.use(userRoutes)
 
 
 

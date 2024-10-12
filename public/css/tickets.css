@@ -1,6 +1,8 @@
+
 /* สไตล์ของตาราง */
 .table-content {
     margin: 20px auto;
+    margin-left: 20%; /* Adjusted to move container to the right */
     padding: 20px;
     background-color: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -13,7 +15,7 @@
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    /* margin: 20px 0; */
     font-size: 16px;
     text-align: left;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

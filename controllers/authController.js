@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs'); 
 const User = require('../models/userModel');
-// const session = require('express-session')
+
 
 // แสดงหน้า Login
 exports.getLoginPage = (req, res) => {

@@ -10,9 +10,9 @@ class Ticket {
     }
 
     // ฟังก์ชันเพื่อเพิ่มคำร้องขอใหม่
-    async save() {
-        const sql = `INSERT INTO ticket (title, date, priority, description, status) VALUES (?, ?, ?, ?, ?)`;
-        const [result] = await pool.execute(sql, [this.title, this.date, this.priority, this.description, this.status]);
+    async save(userId) {
+        const sql = `INSERT INTO ticket (title, date, priority, description, status, user_id) VALUES (?, ?, ?, ?, ?, ?)`;
+        const [result] = await pool.execute(sql, [this.title, this.date, this.priority, this.description, this.status, userId]);
         return result;
     }
 

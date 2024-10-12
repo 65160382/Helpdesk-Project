@@ -26,6 +26,13 @@ class User {
         const [rows] = await pool.execute(sql, [username]);
         return rows[0];
     }
+
+    //แสดงข้อมูล user 
+    static async findAll() {
+        const sql = 'SELECT id, firstname, lastname, email, phone, username FROM users';
+        const [rows] = await pool.execute(sql);
+        return rows;
+    }
 }
 
 module.exports = User;
