@@ -1,4 +1,5 @@
 const Ticket = require('../models/ticketModel')
+const queueController = require('./queueController');
 
 // ฟังก์ชันแสดงฟอร์มคำร้องขอ
 exports.getForm = (req, res) => {
@@ -8,21 +9,31 @@ exports.getForm = (req, res) => {
 // ฟังก์ชันสร้างคำร้องขอใหม่
 exports.createTicket = async (req, res) => {
     try {
-
-        const { title, date, priority, description } = req.body;  // ดึงข้อมูลจากฟอร์ม
-        const userId = req.session.user.id; // ดึง user_id จาก session
-
-        const ticket = new Ticket(title, date, priority, description);  // สร้าง instance ของ Ticket พร้อมกับวันที่ที่จัดรูปแบบแล้ว
-        await ticket.save(userId); // ส่ง userId ไปที่ฟังก์ชัน save
-        res.redirect('tickets');  // เปลี่ยนเส้นทางไปยังหน้าแสดงรายการคำร้องขอ
-
+      const { title, date, priority, description } = req.body; // Get data from the form
+      const userId = req.session.user && req.session.user.id; // Check if req.session.user exists before accessing id
+  
+      if (!userId) {
+        throw new Error('User ID is undefined or not found in session');
+      }
+  
+      const ticket = new Ticket(title, date, priority, description);
+  
+      // Save the queue and get the queue result
+      const queueResult = await queueController.addToQueue(title, description);
+  
+  
+      const queueId = queueResult.insertId;
+      console.log("Generated queueId:", queueId);
+  
+      await ticket.save(userId, queueId);
+  
+      res.redirect('tickets');
+  
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Error creating ticket');  // จัดการข้อผิดพลาด
+      console.error(error);
+      res.status(500).send('Error creating ticket');
     }
-};
-
-
+  };
 
 // ฟังก์ชันดึงรายการคำร้องขอทั้งหมด
 exports.getAllTickets = async (req, res) => {
