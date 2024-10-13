@@ -6,6 +6,7 @@ class Queue {
     this.description = description;
   }
 
+  //บันทึก queue
   async save() {
     const sql = `INSERT INTO queue (name, description) VALUES (?, ?)`;
     const [result] = await pool.execute(sql, [this.name, this.description]);
@@ -16,7 +17,21 @@ class Queue {
     } else {
         throw new Error('Insert ID not found in result');
     }
-}
+    }
+
+    //แสดง queue พร้อมข้อมูลชื่อผู้ใช้จากตาราง ticket
+    static async getAll() {
+        const sql = `
+            SELECT queue.id, queue.name, queue.description, ticket.status , ticket.priority , users.firstname, users.lastname
+            FROM queue
+            JOIN ticket ON queue.id = ticket.queue_id
+            JOIN users ON ticket.user_id = users.id
+        `;
+        const [rows] = await pool.query(sql);
+        return rows;
+    }
+
+
 }
 
 module.exports = Queue;

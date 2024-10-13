@@ -8,6 +8,7 @@ const session = require('express-session')
 const ticketRoutes = require('./routes/ticketRoutes') 
 const authRoutes = require('./routes/authRoutes')
 const userRoutes = require('./routes/userRoutes')
+const queueRoutes = require('./routes/queueRoutes')
 
 
 const app = express();
@@ -45,7 +46,8 @@ app.use(express.json());
 // ใช้ router
 app.use('/', ticketRoutes);  // เชื่อมต่อ routes
 app.use(authRoutes);
-app.use(userRoutes)
+app.use(userRoutes);
+app.use(queueRoutes);
 
 
 

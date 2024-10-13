@@ -1,5 +1,6 @@
 const Queue = require('../models/queueModel');
 
+//เพิ่ม queue
 exports.addToQueue = async (title, description) => {
     try {
       const newQueueEntry = new Queue(title, description);
@@ -16,3 +17,15 @@ exports.addToQueue = async (title, description) => {
       throw new Error('Error adding to queue');
     }
   };
+
+
+//เเสดง queue ทั้งหมดพร้อมข้อมูลชื่อผู้ใช้
+exports.getQueueData = async (req, res) => {
+    try {
+        const queueData = await Queue.getAll();
+        res.render('queue', { queueData });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching queue data');
+    }
+}

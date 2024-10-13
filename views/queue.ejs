@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/queue.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Queue</title>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <div class="table-container">
+      <%- include('partials/sidebar') %>
+      <div class="container">
+          <h1>Queue Management</h1>
+          <table>
+            <thead>
+                <tr>
+                    <th>Order</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Name</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% queueData.forEach((queue, index) => { %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= queue.name %></td>
+                    <td><%= queue.description %></td>
+                    <td><%= queue.firstname %> <%= queue.lastname %></td>
+                    <td><%= queue.priority %></td>
+                    <td><%= queue.status %></td>
+                    <td>
+                        <a href="/queue/<%= queue.id %>/edit" class="button edit">Edit</a>
+                        <a href="/queue/<%= queue.id %>/delete" class="button delete">Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+          </table>
+        </div>
+    </div>    
+</body>
+</html>
