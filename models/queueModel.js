@@ -31,7 +31,12 @@ class Queue {
         return rows;
     }
 
-
+    //อัปเดตสถานะ queue
+    static async updateStatus(id, status) {
+        const sql = `UPDATE ticket SET status = ? WHERE queue_id = ?`;
+        const [result] = await pool.execute(sql, [status, id]);
+        return result;
+    }
 }
 
 module.exports = Queue;

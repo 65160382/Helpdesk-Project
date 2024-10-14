@@ -27,24 +27,46 @@ body {
     color: #333;
   }
   
-  input[type="text"], input[type="email"] {
-    padding: 10px;
-    margin: 5px;
-    width: 200px;
+  /* ตบแต่งฟอร์ม */
+  form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
   }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #5cb85c;
+
+  /* ตบแต่ง select */
+  form select {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    margin-right: 10px;
+    height: 36px; /* ปรับความสูงให้ตรงกับปุ่ม */
+  }
+
+  /* ตบแต่งปุ่มอัปเดต */
+  form .button.update {
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #4d7e9c;
     color: white;
     border: none;
+    border-radius: 4px;
+    font-size: 14px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 36px; /* ปรับความสูงให้ตรงกับ select */
+    line-height: 26px; /* ปรับ line-height เพื่อให้ข้อความอยู่ตรงกลาง */
   }
-  
-  button:hover {
-    background-color: #4cae4c;
+
+  form .button.update:hover {
+    background-color: #0056b3;
   }
-  
+
+  /* ส่วนของตาราง */
   table {
     width: 100%;
     margin: 20px 0;

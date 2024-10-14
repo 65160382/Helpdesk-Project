@@ -17,19 +17,21 @@
             <table>
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Title</th>
-                        <th>Date</th>
-                        <th>Priority</th>
                         <th>Description</th>
+                        <th>Date</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% tickets.forEach(ticket => { %>
+                    <% tickets.forEach((ticket, index) => { %> <!-- เพิ่ม index -->
                         <tr>
+                            <td><%= index + 1 %></td> <!-- เพิ่มแถวนี้ -->
                             <td><%= ticket.title %></td>
-                            <td class="date"><%= ticket.date %></td>
-                            <td><%= ticket.priority %></td>
                             <td><%= ticket.description %></td>
+                            <td class="date"><%= ticket.date %></td>
+                            <td><%= ticket.status %></td>        
                         </tr>
                     <% }); %>
                 </tbody>

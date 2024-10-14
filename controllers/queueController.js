@@ -28,4 +28,18 @@ exports.getQueueData = async (req, res) => {
         console.error(error);
         res.status(500).send('Error fetching queue data');
     }
-}
+};
+
+//อัปเดตสถานะ ticket
+exports.updateStatus = async (req, res) => {
+  const queueId = req.params.id;
+  const newStatus = req.body.status;
+
+  try {
+      await Queue.updateStatus(queueId, newStatus);
+      res.redirect('/queue');  // Redirect back to the queue list after update
+  } catch (error) {
+      console.error("Error updating status:", error);
+      res.status(500).send('Error updating status');
+  }
+};

@@ -6,7 +6,7 @@ class Ticket {
         this.date = date;
         this.priority = priority;
         this.description = description;
-        this.status = 'new'; // กำหนดสถานะเริ่มต้น
+        this.status = 'New'; // กำหนดสถานะเริ่มต้น
     }
 
     // ฟังก์ชันเพื่อเพิ่มคำร้องขอใหม่
