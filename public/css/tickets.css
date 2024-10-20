@@ -1,27 +1,30 @@
-
-/* สไตล์ของตาราง */
-.table-content {
-    margin: 20px auto;
-    margin-left: 20%; /* Adjusted to move container to the right */
+.main-container {
     padding: 20px;
     background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    max-width: 1000px;
     width: 100%;
+}
+
+/* สไตล์ของตาราง */
+.container {
+    width: 70%; /* Reduced width */
+    margin-left: 10%; /* Adjusted to move container to the right */
+    border-radius: 10px;
     font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    background-color: #f9f9f9;
 }
 
 table {
-    width: 100%;
+    width: 100%; /* Set the width of the table to 100% */
     border-collapse: collapse;
-    /* margin: 20px 0; */
+    margin: 20px 0;
     font-size: 16px;
     text-align: left;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
-}
+  }
 
 thead tr {
     background-color: #343a40;
@@ -43,10 +46,7 @@ tbody tr:hover {
     background-color: #e9ecef;
 }
 
-tbody tr:last-of-type {
-    /* border-bottom: 2px solid #343a40; */
-}
-
 tbody td {
     color: #495057;
+    background-color: transparent; /* Set background color to transparent */
 }
