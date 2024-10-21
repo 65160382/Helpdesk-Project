@@ -1,14 +1,15 @@
 //import package module
 const express = require('express');
 const path = require('path');
-const session = require('express-session')
+const session = require('express-session');
 
 
 //import module file router
-const ticketRoutes = require('./routes/ticketRoutes') 
-const authRoutes = require('./routes/authRoutes')
-const userRoutes = require('./routes/userRoutes')
-const queueRoutes = require('./routes/queueRoutes')
+const ticketRoutes = require('./routes/ticketRoutes'); 
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const queueRoutes = require('./routes/queueRoutes');
+const knowRoutes = require('./routes/knowRoutes');
 
 
 const app = express();
@@ -48,6 +49,7 @@ app.use('/', ticketRoutes);  // เชื่อมต่อ routes
 app.use(authRoutes);
 app.use(userRoutes);
 app.use(queueRoutes);
+app.use(knowRoutes);
 
 
 

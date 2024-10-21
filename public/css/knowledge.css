@@ -1,0 +1,188 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Content Area */
+.main-content {
+    margin-left: 200px; /* Width of the sidebar */
+    padding-top: 80px; /* Height of the header plus some extra space */
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.title {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+/* ปรับแต่งแถบค้นหา */
+.search-bar {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 2px solid #3498db;
+    border-radius: 25px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar:focus {
+    border-color: #2980b9;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+}
+
+/* ปรับแต่งปุ่มค้นหาให้เล็กลงและจัดให้อยู่ในบรรทัดเดียวกับช่องค้นหา */
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2rem;
+}
+
+/* ปุ่มค้นหาเฉพาะ */
+.search-button {
+    background-color: #2ecc71 !important;
+    color: #fff !important;
+    padding: 8px 12px !important;
+    width: auto !important;
+    font-size: 0.8rem !important;
+    border: none !important;
+    border-radius: 20px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    transition: background-color 0.3s ease, transform 0.2s ease !important;
+}
+
+.search-button:hover {
+    background-color: #27ae60 !important;
+    transform: scale(1.05) !important;
+}
+
+.search-button i {
+    font-size: 1.1rem;
+}
+
+/* Home Container */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+/* Blog Card Styles */
+.blog-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 600px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ปรับบล็อกให้ blog-number และ title อยู่บรรทัดเดียวกัน */
+.blog-header {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* ระยะห่างระหว่างตัวเลขและชื่อบล็อก */
+    margin-bottom: 20px;
+}
+
+.blog-number {
+    width: 30px;
+    height: 30px;
+    background-color: #2ecc71;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.blog-header h4 {
+    margin: 0; /* เอาค่ามาร์จิ้นของ h4 ออกเพื่อจัดเรียง */
+    color: #2c3e50;
+    font-size: 1.2rem;
+}
+
+
+.view-btn {
+    font-size: 16px;
+    border: 0;
+    /* text-decoration: underline; */
+    cursor: pointer;
+    color: #37B7C3;
+    background: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        padding-top: 60px;
+    }
+    .main-content {
+        margin-left: 0;
+        padding-top: 60px;
+    }
+    .blog-card {
+        width: 90%;
+    }
+}
+
+
+/* Additional Enhancements */
+.blog-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(255, 255, 255, 0.2) 100%
+    );
+    transform: rotate(45deg);
+    z-index: 0;
+    transition: transform 0.5s ease;
+}
+
+.blog-card:hover::before {
+    transform: rotate(45deg) translate(50%, 50%);
+}
+
+.blog-card * {
+    position: relative;
+    z-index: 1;
+}

@@ -31,16 +31,19 @@ exports.login = async (req, res) => {
         return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-     // เก็บข้อมูลผู้ใช้ใน session
-     req.session.user = {
+    // เก็บข้อมูลผู้ใช้และ role ใน session
+    req.session.user = {
         id: user.id,
-        username: user.username
+        username: user.username,
+        roles: user.roles // เปลี่ยนจาก user.role_name เป็น user.roles
     };
 
-    console.log('User logged in successfully')
+    // แสดงค่า role ใน console
+    console.log('User roles:', req.session.user.roles);
     // หากเข้าสู่ระบบสำเร็จ
     res.redirect('/');
 };
+
 
 
 // แสดงหน้า Register

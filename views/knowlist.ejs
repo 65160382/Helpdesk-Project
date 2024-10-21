@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/knowledge.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>KnowledgeBase</title>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <%- include('partials/sidebar') %>
+    <div class="main-content">
+        <h1 class="title">KnowledgeBase</h1>
+        
+        <form action="/search" method="post">
+            <div class="search-container">
+                <input type="text" name="title" class="search-bar" id="blogSearch" placeholder="Search title...">
+                <button class="search-button" type="submit"><i class="fas fa-search"></i> Search</button>
+            </div>
+        </form>
+        
+        <div class="home-container" id="blogContainer">
+            <% for (let index = 0; index < blogList.length; index++) { %>
+                <div class="blog-card">
+                    <div class="blog-header">
+                        <span class="blog-number"><%= index + 1 %></span>
+                        <h4><%= blogList[index].title %></h4>
+                    </div>
+                    <a class="view-btn" href="/blogDetails/<%= blogList[index].id %>">view description</a>
+                </div>               
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
