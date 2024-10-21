@@ -9,6 +9,6 @@ router.get('/knowledge', knowController.getAllBlogs);
 router.post('/search', knowController.searchByTitle);
 
 // แสดงรายละเอียด Blog
-router.get('/blogDetails/:id', knowController.getBlogDetails);
+router.get('/knowdetails/:id', knowController.getBlogDetails);
 
 module.exports = router;

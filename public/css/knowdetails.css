@@ -1,0 +1,76 @@
+/* Know Details Page Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8; /* สีพื้นหลัง */
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Content Area */
+.main-content {
+    position: relative; 
+    margin-left: 200px;
+    padding: 80px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white; /* พื้นหลังของเนื้อหา */
+    border-radius: 10px; /* มุมโค้ง */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* เงา */
+}
+
+/* เพิ่มเลเยอร์พื้นหลัง */
+.main-content::before {
+    content: '';
+    position: absolute; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(236, 240, 241, 0.5); 
+    border-radius: 10px; /* ทำให้มุมโค้งเหมือนกัน */
+    z-index: -1; 
+}
+
+/* สไตล์หัวข้อ */
+.main-content h1 {
+    color: #333; /* Change text color */
+    font-size: 2rem;
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 1.5rem;
+
+}
+
+/* สไตล์เนื้อหา */
+.main-content p {
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    text-align: justify; 
+    color: #555; /* สีเนื้อหา */
+}
+
+/* ปุ่มกลับ */
+.back-button {
+    display: inline-block;
+    background-color: #37B7C3; /* เปลี่ยนสีพื้นหลัง */
+    color: #fff;
+    padding: 12px 24px; 
+    border-radius: 5px; 
+    text-decoration: none;
+    font-size: 1rem; /* ขนาดตัวอักษร */
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #2980b9; /* สีเข้มขึ้นเมื่อ hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        padding: 40px 20px; /* ปรับ padding */
+    }
+}

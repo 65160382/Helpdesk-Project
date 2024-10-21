@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <title><%= blog.title %></title>
+    <link type="text/css" rel="stylesheet" href="/css/styles.css">
+    <link type="text/css" rel="stylesheet" href="/css/knowdetails.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Detail</title>
 </head>
 <body>
     <%- include('partials/header') %>
+    <%- include('partials/sidebar') %>
     <div class="main-content">
         <h1><%= blog.title %></h1>
         <p><%= blog.description %></p> <!-- แสดงรายละเอียด Blog แบบเต็ม -->
-        <a href="/knowledge">Back to KnowledgeBase</a> <!-- ปุ่มกลับไปยังหน้าหลัก -->
+        <a href="/knowledge" class="back-button">Back to KnowledgeBase</a>
     </div>
 </body>
 </html>
