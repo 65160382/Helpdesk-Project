@@ -8,4 +8,7 @@ router.get('/queue', queueController.getQueueData);
 //อัปเดตสถานะ ticket
 router.post('/queue/:id/updateStatus', queueController.updateStatus);
 
+// Route สำหรับการเรียงลำดับลำดับความสำคัญ
+router.post('/queue/sort', queueController.sortQueueByPriority);
+
 module.exports = router;

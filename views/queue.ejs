@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/queue.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Queue</title>
@@ -12,52 +12,73 @@
     <%- include('partials/header') %>
     <div class="table-container">
       <%- include('partials/sidebar') %>
-      <div class="container">
-          <h1>Queue Management</h1>
-          <table>
-            <thead>
-                <tr>
-                    <th>Order</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Name</th>
-                    <th>Priority</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% queueData.forEach((queue, index) => { %>
-                <tr>
-                    <td><%= index + 1 %></td>
-                    <td><%= queue.name %></td>
-                    <td><%= queue.description %></td>
-                    <td><%= queue.firstname %> <%= queue.lastname %></td>
-                    <td><%= queue.priority %></td>
-                    <td>
-                        <form action="/queue/<%= queue.id %>/updateStatus" method="POST">
-                            <select name="status" required>
-                                <option value="New" <%= queue.status === 'New' ? 'selected' : '' %>>New</option>
-                                <option value="Assigned" <%= queue.status === 'Assigned' ? 'selected' : '' %>>Assigned</option>
-                                <option value="In Progress" <%= queue.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
-                                <option value="Pending" <%= queue.status === 'Pending' ? 'selected' : '' %>>Pending</option>
-                                <option value="Resolved" <%= queue.status === 'Resolved' ? 'selected' : '' %>>Resolved</option>
-                                <option value="Closed" <%= queue.status === 'Closed' ? 'selected' : '' %>>Closed</option>
-                                <option value="Reopened" <%= queue.status === 'Reopened' ? 'selected' : '' %>>Reopened</option>
-                                <option value="Escalated" <%= queue.status === 'Escalated' ? 'selected' : '' %>>Escalated</option>
-                            </select>
-                            <button type="submit" class="button update">Update</button>
-                        </form>
-                    </td>
-                    <td>
-                        <a href="/queue/<%= queue.id %>/edit" class="button edit">Edit</a>
-                        <a href="/queue/<%= queue.id %>/delete" class="button delete">Delete</a>
-                    </td>
-                </tr>
-                <% }) %>
-            </tbody>
-          </table>
+      <div class="table-container">
+        <%- include('partials/sidebar') %>
+        <div class="container">
+            <h1>Queue Management</h1>
+            
+            <!-- เพิ่มฟอร์มเรียงลำดับลำดับความสำคัญ -->
+            <form action="/queue/sort" method="POST">
+                <div class="sort-container">
+                    <label>Sort by Priority:</label>
+                    <input type="radio" id="high" name="priority" value="high" <%= sortOption === 'high' ? 'checked' : '' %> />
+                    <label for="high">High</label>
+    
+                    <input type="radio" id="medium" name="priority" value="medium" <%= sortOption === 'medium' ? 'checked' : '' %> />
+                    <label for="medium">Medium</label>
+    
+                    <input type="radio" id="low" name="priority" value="low" <%= sortOption === 'low' ? 'checked' : '' %> />
+                    <label for="low">Low</label>
+    
+                    <button type="submit" class="button-sort">Sort</button>
+                </div>
+            </form>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Name</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% queueData.forEach((queue, index) => { %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= queue.name %></td>
+                        <td><%= queue.description %></td>
+                        <td><%= queue.firstname %> <%= queue.lastname %></td>
+                        <td><%= queue.priority %></td>
+                        <td>
+                            <form action="/queue/<%= queue.id %>/updateStatus" method="POST">
+                                <select name="status" required>
+                                    <option value="New" <%= queue.status === 'New' ? 'selected' : '' %>>New</option>
+                                    <option value="Assigned" <%= queue.status === 'Assigned' ? 'selected' : '' %>>Assigned</option>
+                                    <option value="In Progress" <%= queue.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
+                                    <option value="Pending" <%= queue.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+                                    <option value="Resolved" <%= queue.status === 'Resolved' ? 'selected' : '' %>>Resolved</option>
+                                    <option value="Closed" <%= queue.status === 'Closed' ? 'selected' : '' %>>Closed</option>
+                                    <option value="Reopened" <%= queue.status === 'Reopened' ? 'selected' : '' %>>Reopened</option>
+                                    <option value="Escalated" <%= queue.status === 'Escalated' ? 'selected' : '' %>>Escalated</option>
+                                </select>
+                                <button type="submit" class="button update">Update</button>
+                            </form>
+                        </td>
+                        <td>
+                            <a href="/queue/<%= queue.id %>/edit" class="button edit">Edit</a>
+                            <a href="/queue/<%= queue.id %>/delete" class="button delete">Delete</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
         </div>
+    </div>    
     </div>    
 </body>
 </html>

@@ -21,6 +21,7 @@ exports.addToQueue = async (title, description) => {
 exports.getQueueData = async (req, res) => {
   try {
     const queueData = await Queue.getAll();
+    const sortOption = 'high'; // ตั้งค่าเริ่มต้น
     const user = req.session.user; // ดึงข้อมูลผู้ใช้จาก session // ตรวจสอบว่าผู้ใช้ล็อกอินเข้ามาหรือไม่
 
     if (!user) {
@@ -34,7 +35,7 @@ exports.getQueueData = async (req, res) => {
       return res.status(403).send("Unauthorized");
     }
 
-    res.render("queue", { queueData });
+    res.render("queue", { queueData,sortOption });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching queue data");
@@ -54,3 +55,26 @@ exports.updateStatus = async (req, res) => {
     res.status(500).send("Error updating status");
   }
 };
+
+//เรียงลำดับความสำคัญ
+exports.sortQueueByPriority = async (req, res) => {
+  try {
+      const sortOption = req.body.priority || 'high'; // กำหนดค่าเริ่มต้นเป็น 'high' ถ้าไม่มีค่า
+      let sortedQueue;
+
+      if (sortOption === 'high') {
+          sortedQueue = await Queue.getSortedByPriority('high');
+      } else if (sortOption === 'medium') {
+          sortedQueue = await Queue.getSortedByPriority('medium');
+      } else {
+          sortedQueue = await Queue.getSortedByPriority('low');
+      }
+
+      console.log(sortedQueue);
+      res.render('queue', { queueData: sortedQueue, sortOption }); // ส่ง sortOption ไปยัง view
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Server Error');
+  }
+};
+

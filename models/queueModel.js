@@ -37,6 +37,20 @@ class Queue {
         const [result] = await pool.execute(sql, [status, id]);
         return result;
     }
+
+    // ฟังก์ชันสำหรับการเรียงลำดับ queue ตาม priority
+    static async getSortedByPriority(priorityLevel) {
+        const sql = `
+            SELECT queue.id, queue.name, queue.description, ticket.status, ticket.priority, users.firstname, users.lastname
+            FROM queue
+            JOIN ticket ON queue.id = ticket.queue_id
+            JOIN users ON ticket.user_id = users.id
+            WHERE ticket.priority = ?
+            ORDER BY ticket.priority DESC
+        `;
+        const [rows] = await pool.execute(sql, [priorityLevel]);
+        return rows;
+    }
 }
 
 module.exports = Queue;
