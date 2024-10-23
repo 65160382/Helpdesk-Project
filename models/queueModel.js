@@ -22,10 +22,12 @@ class Queue {
     //แสดง queue พร้อมข้อมูลชื่อผู้ใช้จากตาราง ticket
     static async getAll() {
         const sql = `
-            SELECT queue.id, queue.name, queue.description, ticket.status , ticket.priority , users.firstname, users.lastname
+            SELECT queue.id, queue.name, queue.description, ticket.status, ticket.priority, 
+                   users.firstname, users.lastname, staff_queue.staff_id
             FROM queue
             JOIN ticket ON queue.id = ticket.queue_id
             JOIN users ON ticket.user_id = users.id
+            LEFT JOIN staff_queue ON queue.id = staff_queue.queue_id
         `;
         const [rows] = await pool.query(sql);
         return rows;

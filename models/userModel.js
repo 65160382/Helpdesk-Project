@@ -55,11 +55,20 @@ class User {
         }
     }
     
-
     //แสดงข้อมูล user 
     static async findAll() {
         const sql = 'SELECT id, firstname, lastname, email, phone, username FROM users';
         const [rows] = await pool.execute(sql);
+        return rows;
+    }
+
+    //แสดงชื่อนามสกุล staff
+    static async getStaff() {
+        const sql = `
+            SELECT u.id as user_id, s.id as staff_id, u.firstname, u.lastname 
+            FROM users u
+            INNER JOIN staff s ON u.id = s.user_id`;
+        const [rows] = await pool.query(sql);
         return rows;
     }
 

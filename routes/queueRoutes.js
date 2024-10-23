@@ -14,4 +14,7 @@ router.post('/queue/sort', queueController.sortQueueByPriority);
 // Route สำหรับลบ queue
 router.post('/queue/:id/delete', queueController.deleteQueue);
 
+//อัพเดตข้อมูลลง staff_ticket
+router.post('/queue/:id/assignStaff',queueController.assignStaff)
+
 module.exports = router;

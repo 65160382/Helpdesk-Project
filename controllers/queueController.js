@@ -1,4 +1,6 @@
 const Queue = require("../models/queueModel");
+const User = require('../models/userModel');
+const StaffQueue = require('../models/staffQueueModel');
 
 //เพิ่ม queue
 exports.addToQueue = async (title, description) => {
@@ -21,8 +23,10 @@ exports.addToQueue = async (title, description) => {
 exports.getQueueData = async (req, res) => {
   try {
     const queueData = await Queue.getAll();
+    const staffData = await User.getStaff(); // ฟังก์ชันดึงข้อมูล staff
     const sortOption = 'high'; // ตั้งค่าเริ่มต้น
     const user = req.session.user; // ดึงข้อมูลผู้ใช้จาก session // ตรวจสอบว่าผู้ใช้ล็อกอินเข้ามาหรือไม่
+
 
     if (!user) {
       return res.status(401).send("Please log in to access this page.");
@@ -35,7 +39,7 @@ exports.getQueueData = async (req, res) => {
       return res.status(403).send("Unauthorized");
     }
 
-    res.render("queue", { queueData,sortOption });
+    res.render("queue", { queueData,sortOption,staffData  });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching queue data");
@@ -56,6 +60,24 @@ exports.updateStatus = async (req, res) => {
   }
 };
 
+//อัปเดตข้อมูลลงตาราง staff_queue
+exports.assignStaff = async (req, res) => {
+  try {
+      const queueId = req.params.id;
+      const staffId = req.body.staffId;
+
+      // console.log('Assigning staff - Queue ID:', queueId);
+      // console.log('Assigning staff - Staff ID:', staffId);
+
+
+      // เพิ่มข้อมูล staffId และ queueId ลงในตาราง staff_queue
+      await StaffQueue.assignStaffToQueue(queueId, staffId);
+      res.redirect('/queue');
+  } catch (error) {
+      console.error('Error in assignStaff:', error);
+  }
+};
+
 //เรียงลำดับความสำคัญ
 exports.sortQueueByPriority = async (req, res) => {
   try {
@@ -70,8 +92,9 @@ exports.sortQueueByPriority = async (req, res) => {
           sortedQueue = await Queue.getSortedByPriority('low');
       }
 
-      console.log(sortedQueue);
-      res.render('queue', { queueData: sortedQueue, sortOption }); // ส่ง sortOption ไปยัง view
+      const staffData = await User.getStaff(); // ดึงข้อมูล staff
+
+      res.render('queue', { queueData: sortedQueue, sortOption,staffData }); // ส่ง sortOption และ staffData ไปยัง view
   } catch (err) {
       console.error(err);
       res.status(500).send('Server Error');
