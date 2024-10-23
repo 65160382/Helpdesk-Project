@@ -37,11 +37,17 @@ exports.createTicket = async (req, res) => {
 
 // ฟังก์ชันดึงรายการคำร้องขอทั้งหมด
 exports.getAllTickets = async (req, res) => {
-    try {
-        const tickets = await Ticket.fetchAll();  // เรียกใช้ฟังก์ชัน fetchAll() เพื่อดึงข้อมูลทั้งหมด
-        res.render('tickets', { tickets });  // ส่งข้อมูลไปยัง View
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Error fetching tickets');
-    }
+  try {
+      const user = req.session.user; // ดึงข้อมูลผู้ใช้จาก session
+      
+      if (!user) {
+          return res.status(401).send('User not logged in');
+      }
+
+      const tickets = await Ticket.fetchByUserId(user.id);  // ดึง ticket ตาม user id ที่ login เข้ามา
+      res.render('tickets', { tickets });  // ส่งข้อมูล ticket ไปยัง view
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error fetching tickets');
+  }
 };

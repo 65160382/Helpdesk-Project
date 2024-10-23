@@ -20,10 +20,10 @@ class Ticket {
         return result;
     }
     
-    // ฟังก์ชันดึงรายการคำร้องขอทั้งหมด (ถ้าต้องการ)
-    static async fetchAll() {
-        const sql = `SELECT * FROM ticket`;
-        const [rows] = await pool.execute(sql);
+    // ฟังก์ชันดึงรายการคำร้องขอทั้งหมด 
+    static async fetchByUserId(userId) {
+        const sql = `SELECT * FROM ticket WHERE user_id = ?`; // user_id คือ column ในตาราง ticket ที่ใช้เชื่อมกับ user
+        const [rows] = await pool.execute(sql, [userId]); // ส่งค่า userId เข้าไปในคำสั่ง SQL
         return rows;
     }
 }

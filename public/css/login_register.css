@@ -515,6 +515,11 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     margin-left: 110px;
     margin-right: 20px;
     margin-top: 10px; }
+
+  .alert-message {
+    color: red; /* เปลี่ยนสีข้อความเป็นสีแดง */
+    margin: 20px 0; /* เพิ่มระยะห่างด้านบนและด้านล่าง */
+  }
   
   @media screen and (max-width: 1200px) {
     .container {

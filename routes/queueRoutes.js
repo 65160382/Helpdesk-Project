@@ -11,4 +11,7 @@ router.post('/queue/:id/updateStatus', queueController.updateStatus);
 // Route สำหรับการเรียงลำดับลำดับความสำคัญ
 router.post('/queue/sort', queueController.sortQueueByPriority);
 
+// Route สำหรับลบ queue
+router.post('/queue/:id/delete', queueController.deleteQueue);
+
 module.exports = router;

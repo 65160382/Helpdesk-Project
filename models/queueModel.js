@@ -51,6 +51,12 @@ class Queue {
         const [rows] = await pool.execute(sql, [priorityLevel]);
         return rows;
     }
+
+    //ลบ queue ที่เราเลือก
+    static async deleteById(id) {
+        const sql = `DELETE FROM queue WHERE id = ?`;
+        await pool.execute(sql, [id]); // ใช้ SQL ในการลบ queue
+    }
 }
 
 module.exports = Queue;

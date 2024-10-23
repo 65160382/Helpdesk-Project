@@ -14,7 +14,7 @@ exports.login = async (req, res) => {
 
     // ตรวจสอบว่ามีค่า username หรือ password หรือไม่
     if (!username || !password) {
-        return res.status(400).json({ message: 'Username and password are required' });
+        return res.render('login', { message: 'Username and password are required' });
     }
 
     // ค้นหาผู้ใช้โดยใช้ username
@@ -22,13 +22,13 @@ exports.login = async (req, res) => {
     
     // ตรวจสอบว่าพบผู้ใช้หรือไม่
     if (!user) {
-        return res.status(401).json({ message: 'Invalid credentials' });
+        return res.render('login', { message: 'username not found' });
     }
 
     // ตรวจสอบ password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-        return res.status(401).json({ message: 'Invalid credentials' });
+        return res.render('login', { message: 'Incorrect password' });
     }
 
     // เก็บข้อมูลผู้ใช้และ role ใน session
@@ -43,7 +43,6 @@ exports.login = async (req, res) => {
     // หากเข้าสู่ระบบสำเร็จ
     res.redirect('/');
 };
-
 
 
 // แสดงหน้า Register

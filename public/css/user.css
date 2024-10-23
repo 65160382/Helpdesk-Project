@@ -33,18 +33,6 @@ input[type="text"], input[type="email"] {
   width: 200px;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #5cb85c;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #4cae4c;
-}
-
 table {
   width: 100%;
   margin: 20px 0;
@@ -66,8 +54,15 @@ th {
   font-weight: bold;
 }
 
-a.button {
+.action-buttons {
+  display: flex;
+  gap: 10px; /* เพิ่มระยะห่างระหว่างปุ่ม */
+}
+
+.button-edit, .button-delete {
   display: inline-block;
+  border: none;
+  cursor: pointer;
   padding: 10px 15px;
   margin: 5px;
   color: white;
@@ -76,19 +71,19 @@ a.button {
   transition: background-color 0.3s ease;
 }
 
-a.button.edit {
+.button-edit {
   background-color: #5cb85c; /* สีเขียวสำหรับปุ่ม Edit */
 }
 
-a.button.edit:hover {
-  background-color: #4cae4c; /* สีเขียวเข้มขึ้นเมื่อ hover */
-}
-
-a.button.delete {
+.button-delete {
   background-color: #d9534f; /* สีแดงสำหรับปุ่ม Delete */
 }
 
-a.button.delete:hover {
+.button-edit:hover {
+  background-color: #4cae4c; /* สีเขียวเข้มขึ้นเมื่อ hover */
+}
+
+.button-delete:hover {
   background-color: #c9302c; /* สีแดงเข้มขึ้นเมื่อ hover */
 }
 

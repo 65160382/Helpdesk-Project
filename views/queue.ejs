@@ -70,8 +70,9 @@
                             </form>
                         </td>
                         <td>
-                            <a href="/queue/<%= queue.id %>/edit" class="button edit">Edit</a>
-                            <a href="/queue/<%= queue.id %>/delete" class="button delete">Delete</a>
+                            <form action="/queue/<%= queue.id %>/delete" method="POST">
+                                <button type="submit" class="button-delete">Delete</button>
+                            </form>
                         </td>
                     </tr>
                     <% }) %>

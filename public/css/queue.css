@@ -125,10 +125,12 @@ body {
     font-weight: bold;
   }
   
-  a.button {
+  .button-delete {
     display: inline-block;
     padding: 10px 15px;
     margin: 5px;
+    border: none;
+    font-size: 14px;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -143,11 +145,11 @@ body {
     background-color: #4cae4c; /* สีเขียวเข้มขึ้นเมื่อ hover */
   }
   
-  a.button.delete {
+  .button-delete {
     background-color: #d9534f; /* สีแดงสำหรับปุ่ม Delete */
   }
   
-  a.button.delete:hover {
+  .button-delete:hover {
     background-color: #c9302c; /* สีแดงเข้มขึ้นเมื่อ hover */
   }
   

@@ -26,3 +26,15 @@ exports.getAllUsers = async (req, res) => {
         res.status(500).send('Server Error');
     }
 };
+
+//ลบ users 
+exports.deleteUser = async (req, res) => {
+    try {
+        const userId = req.params.id; // ดึง user id จาก URL params
+        await User.deleteById(userId); // เรียกใช้ฟังก์ชันใน model เพื่อลบผู้ใช้
+        res.redirect('/users'); // เมื่อสำเร็จ กลับไปที่หน้ารายการผู้ใช้
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error deleting user');
+    }
+};

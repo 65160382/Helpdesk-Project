@@ -78,3 +78,16 @@ exports.sortQueueByPriority = async (req, res) => {
   }
 };
 
+// ฟังก์ชันสำหรับลบ queue
+exports.deleteQueue = async (req, res) => {
+  try {
+      const queueId = req.params.id; // ดึง id จาก URL
+      await Queue.deleteById(queueId); // เรียกใช้ฟังก์ชันใน model เพื่อลบ queue
+
+      res.redirect('/queue'); // หลังจากลบเสร็จให้กลับไปที่หน้า queue
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error deleting queue');
+  }
+};
+

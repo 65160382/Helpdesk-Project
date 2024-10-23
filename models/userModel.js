@@ -62,6 +62,12 @@ class User {
         const [rows] = await pool.execute(sql);
         return rows;
     }
+
+    //ลบ users ที่เลือก 
+    static async deleteById(id) {
+        const sql = 'DELETE FROM users WHERE id = ?'; // Query เพื่อลบผู้ใช้ตาม id
+        await pool.execute(sql, [id]); // ลบผู้ใช้จากฐานข้อมูล
+    }
 }
 
 module.exports = User;

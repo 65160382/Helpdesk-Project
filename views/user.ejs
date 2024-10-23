@@ -34,9 +34,15 @@
                   <td><%= user.phone %></td>
                   <td><%= user.username %></td>
                   <td>
-                    <a href="/users/<%= user.id %>/edit" class="button edit">Edit</a>
-                    <a href="/users/<%= user.id %>/delete" class="button delete">Delete</a>
-                </td>
+                    <div class="action-buttons">
+                        <form action="/users/<%= user.id %>/edit" method="post">
+                            <button type="submit" class="button-edit">Edit</button>
+                        </form>  
+                        <form action="/users/<%= user.id %>/delete" method="post">
+                            <button type="submit" class="button-delete">Delete</button>
+                        </form>
+                    </div>
+                  </td>
                 </tr>
               <% }) %>
             </tbody> 
