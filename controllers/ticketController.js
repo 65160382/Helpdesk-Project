@@ -23,7 +23,7 @@ exports.createTicket = async (req, res) => {
   
   
       const queueId = queueResult.insertId;
-      console.log("Generated queueId:", queueId);
+      // console.log("Generated queueId:", queueId);
   
       await ticket.save(userId, queueId);
   
@@ -45,6 +45,7 @@ exports.getAllTickets = async (req, res) => {
       }
 
       const tickets = await Ticket.fetchByUserId(user.id);  // ดึง ticket ตาม user id ที่ login เข้ามา
+
       res.render('tickets', { tickets });  // ส่งข้อมูล ticket ไปยัง view
   } catch (error) {
       console.error(error);

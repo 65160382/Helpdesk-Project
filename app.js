@@ -10,6 +10,7 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const queueRoutes = require('./routes/queueRoutes');
 const knowRoutes = require('./routes/knowRoutes');
+const questionRoutes = require('./routes/questionRoutes');
 
 
 const app = express();
@@ -39,8 +40,6 @@ app.use((req, res, next) => {
     next();
 });
 
-
-
 // กำหนด express ให้อ่านข้อมูลที่ส่งมาในรูปแบบของ json คือ ข้อมูลที่ส่งมาจาก API
 app.use(express.json());
 
@@ -50,6 +49,7 @@ app.use(authRoutes);
 app.use(userRoutes);
 app.use(queueRoutes);
 app.use(knowRoutes);
+app.use(questionRoutes);
 
 
 

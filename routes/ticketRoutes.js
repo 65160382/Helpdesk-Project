@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const ticketController = require('../controllers/ticketController');
 
-// เส้นทางเพื่อแสดงฟอร์มสร้างคำร้องขอใหม่
+// แสดงหน้าหลัก
 router.get('/', ticketController.getForm);
 
 // เส้นทางเพื่อสร้างคำร้องขอใหม่

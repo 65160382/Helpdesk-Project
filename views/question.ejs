@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Question</title>
+</head>
+<body>
+    <h2>Submit a Question for Ticket #<%= ticket_id %></h2>
+    <form action="/questions/create" method="POST">
+        <input type="hidden" name="ticket_id" value="<%= ticket_id %>">
+        <input type="hidden" name="user_id" value="<%= user_id %>"> <!-- ส่ง user_id ของผู้ใช้ที่เข้าสู่ระบบ -->
+        <textarea name="question" placeholder="พิมพ์คำถามของคุณที่นี่"></textarea>
+        <button type="submit">ส่งคำถาม</button>
+    </form>  
+</body>
+</html>
