@@ -11,12 +11,12 @@ class Queue {
     const sql = `INSERT INTO queue (name, description) VALUES (?, ?)`;
     const [result] = await pool.execute(sql, [this.name, this.description]);
     
-    // Check the result structure and return the insertId
-    if (result && result.insertId) {
-        return { insertId: result.insertId }; // Return insertId in the correct format
-    } else {
-        throw new Error('Insert ID not found in result');
-    }
+        // Check the result structure and return the insertId
+        if (result && result.insertId) {
+            return { insertId: result.insertId }; // Return insertId in the correct format
+        } else {
+            throw new Error('Insert ID not found in result');
+        }
     }
 
     //แสดง queue พร้อมข้อมูลชื่อผู้ใช้จากตาราง ticket
@@ -43,10 +43,12 @@ class Queue {
     // ฟังก์ชันสำหรับการเรียงลำดับ queue ตาม priority
     static async getSortedByPriority(priorityLevel) {
         const sql = `
-            SELECT queue.id, queue.name, queue.description, ticket.status, ticket.priority, users.firstname, users.lastname
+            SELECT queue.id, queue.name, queue.description, ticket.status, ticket.priority, 
+                   users.firstname, users.lastname, staff_queue.staff_id
             FROM queue
             JOIN ticket ON queue.id = ticket.queue_id
             JOIN users ON ticket.user_id = users.id
+            LEFT JOIN staff_queue ON queue.id = staff_queue.queue_id  -- join เพื่อดึงข้อมูล staff_id
             WHERE ticket.priority = ?
             ORDER BY ticket.priority DESC
         `;
@@ -58,6 +60,13 @@ class Queue {
     static async deleteById(id) {
         const sql = `DELETE FROM queue WHERE id = ?`;
         await pool.execute(sql, [id]); // ใช้ SQL ในการลบ queue
+    }
+
+    // ฟังก์ชันสำหรับการดึง ticketId จาก queueId
+    static async getTicketByQueueId(queueId) {
+        const sql = `SELECT ticket.id FROM ticket JOIN queue ON queue.id = ticket.queue_id WHERE queue.id = ?`;
+        const [rows] = await pool.execute(sql, [queueId]);
+        return rows[0];  // ส่งคืน ticket แถวแรกที่พบ
     }
 }
 

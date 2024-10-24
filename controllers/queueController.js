@@ -1,6 +1,7 @@
 const Queue = require("../models/queueModel");
 const User = require('../models/userModel');
 const StaffQueue = require('../models/staffQueueModel');
+const StaffTicket = require('../models/staffTicketModel');
 
 //เพิ่ม queue
 exports.addToQueue = async (title, description) => {
@@ -65,13 +66,21 @@ exports.assignStaff = async (req, res) => {
   try {
       const queueId = req.params.id;
       const staffId = req.body.staffId;
+      
+      //  ดึง ticketId ที่เชื่อมโยงกับ queueId จากตาราง queue
+      const ticket = await Queue.getTicketByQueueId(queueId);
+      const ticketId = ticket.id;
 
       // console.log('Assigning staff - Queue ID:', queueId);
       // console.log('Assigning staff - Staff ID:', staffId);
-
+      console.log(ticketId);
 
       // เพิ่มข้อมูล staffId และ queueId ลงในตาราง staff_queue
       await StaffQueue.assignStaffToQueue(queueId, staffId);
+
+      // บันทึกข้อมูลลงตาราง staff_ticket
+      await StaffTicket.assignStaffToTicket(ticketId, staffId);
+
       res.redirect('/queue');
   } catch (error) {
       console.error('Error in assignStaff:', error);
@@ -94,7 +103,7 @@ exports.sortQueueByPriority = async (req, res) => {
 
       const staffData = await User.getStaff(); // ดึงข้อมูล staff
 
-      res.render('queue', { queueData: sortedQueue, sortOption,staffData }); // ส่ง sortOption และ staffData ไปยัง view
+      res.render('queue', { queueData: sortedQueue, sortOption, staffData }); // ส่ง sortOption และ staffData ไปยัง view
   } catch (err) {
       console.error(err);
       res.status(500).send('Server Error');
