@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs'); 
 const User = require('../models/userModel');
+const UserActivity = require('../models/userActivityModel');
 
 
 // แสดงหน้า Login
@@ -35,11 +36,15 @@ exports.login = async (req, res) => {
     req.session.user = {
         id: user.id,
         username: user.username,
-        roles: user.roles // เปลี่ยนจาก user.role_name เป็น user.roles
+        roles: user.roles 
     };
+
+    // บันทึกกิจกรรมการเข้าสู่ระบบ
+    await UserActivity.recordLogin(user.id);
 
     // แสดงค่า role ใน console
     console.log('User roles:', req.session.user.roles);
+
     // หากเข้าสู่ระบบสำเร็จ
     res.redirect('/');
 };

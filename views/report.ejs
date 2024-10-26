@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/report.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <%- include('partials/sidebar') %>
+    <div class="container">
+        <h1>Report</h1>
+    <p>Number of logins today</p>
+    <% if (loginCount !== null) { %>
+        <p>จำนวนการเข้าสู่ระบบของผู้ใช้ในวันนี้: <%= loginCount %></p>
+    <% } else { %>
+        <p>ไม่มีข้อมูลการเข้าสู่ระบบสำหรับวันนี้</p>
+    <% } %>
+    <p>Number of tickets today</p>
+    <% if (ticketCount !== null) { %>
+        <p>จำนวนการส่งคำขอของผู้ใช้ในวันนี้: <%= ticketCount %></p>
+    <% } else { %>
+        <p>ไม่มีข้อมูลการส่งคำขอสำหรับวันนี้</p>
+    <% } %>
+    </div>
+</body>
+</html>
