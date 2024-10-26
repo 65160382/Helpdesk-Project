@@ -32,21 +32,30 @@
                 <ul>
                     <% questions.forEach((question, index) => { %>
                         <li>
-                            <i class="fas fa-user-circle custom-size"></i>
-                            <strong><%= question.firstname %> <%= question.lastname %></strong> 
-                            <p><%= question.question %></p>
-                            <!-- แสดงคำตอบถ้ามี -->
+                            <!-- User Question (Right side) -->
+                            <div class="user-message message-bubble">
+                                <p class="message-text"><%= question.question %></p>
+                            </div>
+        
+                            <!-- Staff Answer (Left side) -->
                             <% if (question.answer) { %>
-                                <div class="answer">
-                                    <i class="fas fa-user-circle custom-size"></i>
-                                    <strong>ตอบโดย <%= question.staff_firstname %> <%= question.staff_lastname %></strong>
-                                    <p><%= question.answer %></p>
+                                <div class="answer-container">
+                                    <!-- Staff name and message -->
+                                    <div class="staff-message-group">
+                                        <div class="staff-info">
+                                            <i class="fas fa-user-circle custom-sizes"></i>
+                                            <strong><%= question.staff_firstname %> <%= question.staff_lastname %></strong>
+                                        </div>
+                                        <div class="answer message-bubble">
+                                            <p class="message-text"><%= question.answer %></p>
+                                        </div>
+                                    </div>
                                 </div>
                             <% } %>
                         </li>
                     <% }) %>
                 </ul>
-            <% }  %>
+            <% } %>
         </div>
     </diV>
 </body>

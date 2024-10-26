@@ -30,48 +30,90 @@
     text-decoration: underline;
 }
 
-/* Question form container */
-.question{
+/* Question chat container */
+.question {
     margin-top: 20px;
-    background-color: #ffffff;
+    background-color: #96B2FF;
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Question title styling */
-h2 {
-    color: #333;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #295F98;
+/* Reset list styles */
+.question ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-/* Form styling */
-form {
+.question li {
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }
 
-textarea {
-    width: 100%;
-    min-height: 120px;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    resize: vertical;
-    box-sizing: border-box;
+/* Base message bubble styles */
+.message-bubble {
+    max-width: 70%;
+    padding: 12px 16px;
+    border-radius: 15px;
+    margin: 4px 0;
+    position: relative;
 }
 
-textarea:focus {
-    outline: none;
-    border-color: #295F98;
-    box-shadow: 0 0 5px rgba(41, 95, 152, 0.2);
+/* User message styling (right side) */
+.user-message {
+    align-self: flex-end;
+    background-color: #4CC764;
+    color: white;
+    border-radius: 20px 20px 5px 20px;
 }
 
+/* Staff message group styling */
+.staff-message-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 70%;
+    margin-left: 5px; /* ลดระยะห่างจากขอบซ้าย */
+}
+
+/* Staff info styling */
+.staff-info {
+    display: flex;
+    align-items: center;
+    /* gap: 8px; */
+    margin-bottom: 2px; /* ลดระยะห่างระหว่างชื่อกับ bubble */
+    margin-left: 0; /* ลบ margin ด้านซ้ายออก */
+}
+
+.staff-info strong {
+    font-size: 13.6px; /* ปรับขนาดตัวอักษรให้ตรงกับรูป */
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+.custom-sizes {
+    font-size: 25px; /* ปรับขนาดไอคอนลงเล็กน้อย */
+    color: #ececec; /* เปลี่ยนสีไอคอนเป็นสีขาว */
+    margin-right: 10px;
+}
+
+/* Staff message styling (left side) */
+.answer {
+    background-color: #f0f0f0;
+    color: black;
+    border-radius: 20px 20px 20px 5px;
+    margin-top: 4px;
+}
+
+/* Message text styling */
+.message-text {
+    margin: 0;
+    word-wrap: break-word;
+}
+
+/* ปุ่มสำหรับส่ง */
 button[type="submit"] {
     background-color: #295F98;
     color: white;
@@ -89,30 +131,6 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #1e4b7a;
 }
-
-/* ส่วนแสดงผลคำถาม */
-ul {
-    list-style-type: none; /* เอาจุดของแท็ก li ออก */
-    padding: 0;
-}
-
-/* จัดเรียงไอคอนและชื่อผู้ใช้ให้อยู่ในแนวเดียวกัน */
-.question-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.question-item .fas {
-    margin-right: 10px; /* ระยะห่างระหว่างไอคอนและชื่อผู้ใช้ */
-    font-size: 24px; /* ขนาดของไอคอน */
-}
-
-.question-item strong {
-    margin-bottom: 0; /* ตั้งค่า margin-bottom เป็น 0 */
-    padding-bottom: 0; /* ตั้งค่า padding-bottom เป็น 0 */
-}
-
 
 /* Responsive design */
 @media (max-width: 1024px) {
