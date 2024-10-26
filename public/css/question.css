@@ -1,0 +1,133 @@
+/* Main container styling aligned with queue table */
+.container {
+    width: 70%;
+    margin-top: 70px;
+    margin-left: 20%;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Breadcrumb styling */
+.breadcrumb {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+.breadcrumb a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.breadcrumb span {
+    color: #666;
+    margin: 0 8px;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Question form container */
+.question-container {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Question title styling */
+h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #295F98;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #295F98;
+    box-shadow: 0 0 5px rgba(41, 95, 152, 0.2);
+}
+
+button[type="submit"] {
+    background-color: #295F98;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    /* ปรับตำแหน่งปุ่ม */
+    align-self: flex-end; 
+}
+
+button[type="submit"]:hover {
+    background-color: #1e4b7a;
+}
+
+/* ส่วนแสดงผลคำถาม */
+ul {
+    list-style-type: none; /* เอาจุดของแท็ก li ออก */
+    padding: 0;
+}
+
+/* จัดเรียงไอคอนและชื่อผู้ใช้ให้อยู่ในแนวเดียวกัน */
+.question-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.question-item .fas {
+    margin-right: 10px; /* ระยะห่างระหว่างไอคอนและชื่อผู้ใช้ */
+    font-size: 24px; /* ขนาดของไอคอน */
+}
+
+.question-item strong {
+    margin-bottom: 0; /* ตั้งค่า margin-bottom เป็น 0 */
+    padding-bottom: 0; /* ตั้งค่า padding-bottom เป็น 0 */
+}
+
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .container {
+        width: 80%;
+        margin-left: 15%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        margin-left: 5%;
+    }
+    
+    h2 {
+        font-size: 1.2rem;
+    }
+}

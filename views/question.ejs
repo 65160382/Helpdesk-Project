@@ -2,15 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/question.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Create Question</title>
 </head>
 <body>
-    <h2>Submit a Question for Ticket #<%= ticket_id %></h2>
-    <form action="/questions/create" method="POST">
-        <input type="hidden" name="ticket_id" value="<%= ticket_id %>">
-        <input type="hidden" name="user_id" value="<%= user_id %>"> <!-- ส่ง user_id ของผู้ใช้ที่เข้าสู่ระบบ -->
-        <textarea name="question" placeholder="พิมพ์คำถามของคุณที่นี่"></textarea>
-        <button type="submit">ส่งคำถาม</button>
-    </form>  
+    <%- include('partials/header') %>
+    <%- include('partials/sidebar') %>
+    <diV class="container">
+        <div class="breadcrumb">
+            <a href="/">Home</a>
+            <span>/</span>
+            <a href="/tickets">My Ticket</a>
+            <span>/</span>
+            <a href="#">Question</a>
+        </div>
+
+        <h2>Submit a Question for Ticket #<%= ticket_id %></h2>
+        <form action="/questions/create" method="POST">
+            <input type="hidden" name="ticket_id" value="<%= ticket_id %>">
+            <input type="hidden" name="user_id" value="<%= user_id %>"> <!-- ส่ง user_id ของผู้ใช้ที่เข้าสู่ระบบ -->
+            <textarea name="question" placeholder="พิมพ์คำถามของคุณที่นี่"></textarea>
+            <button type="submit">ส่งคำถาม</button>
+        </form> 
+
+        <div class="question">
+            <% if (questions) { %>
+                <ul>
+                    <% questions.forEach(question => { %>
+                        <li>
+                            <i class="fas fa-user-circle custom-size"></i>
+                            <strong><%= question.firstname %> <%= question.lastname %></strong> 
+                            <p><%= question.question %></p>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } %>
+        </div>
+    </diV>
 </body>
 </html>
