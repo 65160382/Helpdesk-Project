@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/answer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>View Questions</title>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <%- include('partials/sidebar') %>
+    <div class="container">
+        <h1>Q&A</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order</th>
+                    <th>Name</th>
+                    <th>Question</th>
+                    <th>Answer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% questions.forEach((question, index) => { %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= question.firstname %> <%= question.lastname %></td>
+                        <td><%= question.question %></td>
+                        <td>
+                            <!-- แสดงคำตอบถ้ามี -->
+                            <% if (question.answer) { %>
+                                <%= question.answer %>
+                            <% } else { %>
+                                <form action="/answers/add" method="POST">
+                                    <input type="hidden" name="question_id" value="<%= question.question_id %>">
+                                    <input type="hidden" name="staff_id" value="<%= staff_id %>">
+                                    <div class="answer-container">
+                                        <textarea name="answer" placeholder="พิมพ์คำตอบที่นี่"></textarea>
+                                        <button class="button-sub" type="submit">ส่ง</button>
+                                    </div>
+                                </form>
+                            <% } %>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -11,7 +11,7 @@ const userRoutes = require('./routes/userRoutes');
 const queueRoutes = require('./routes/queueRoutes');
 const knowRoutes = require('./routes/knowRoutes');
 const questionRoutes = require('./routes/questionRoutes');
-
+const answerRouets = require('./routes/answerRoutes');
 
 const app = express();
 const port = 3000;
@@ -50,6 +50,7 @@ app.use(userRoutes);
 app.use(queueRoutes);
 app.use(knowRoutes);
 app.use(questionRoutes);
+app.use(answerRouets);
 
 
 

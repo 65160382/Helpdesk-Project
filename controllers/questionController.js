@@ -9,7 +9,7 @@ exports.getQuestion = async (req, res) => {
         // ดึงคำถามทั้งหมดที่เกี่ยวข้องกับ ticket_id
         const questions = await Question.getQuestionsByTicket(ticket_id);
 
-        // ส่งข้อมูล ticket_id, user_id, และคำถามไปยัง view
+        // ส่งข้อมูล ticket_id, user_id, และ question
         res.render('question', { ticket_id, user_id, questions });
     } catch (error) {
         console.error('Error fetching questions:', error);

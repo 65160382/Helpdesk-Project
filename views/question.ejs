@@ -28,17 +28,25 @@
         </form> 
 
         <div class="question">
-            <% if (questions) { %>
+            <% if (questions.length) { %>
                 <ul>
-                    <% questions.forEach(question => { %>
+                    <% questions.forEach((question, index) => { %>
                         <li>
                             <i class="fas fa-user-circle custom-size"></i>
                             <strong><%= question.firstname %> <%= question.lastname %></strong> 
                             <p><%= question.question %></p>
+                            <!-- แสดงคำตอบถ้ามี -->
+                            <% if (question.answer) { %>
+                                <div class="answer">
+                                    <i class="fas fa-user-circle custom-size"></i>
+                                    <strong>ตอบโดย <%= question.staff_firstname %> <%= question.staff_lastname %></strong>
+                                    <p><%= question.answer %></p>
+                                </div>
+                            <% } %>
                         </li>
                     <% }) %>
                 </ul>
-            <% } %>
+            <% }  %>
         </div>
     </diV>
 </body>
