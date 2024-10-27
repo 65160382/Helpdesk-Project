@@ -22,9 +22,22 @@ exports.getReport = async (req, res) => {
 
         // ดึงจำนวนการส่งคำขอ Ticket ของผู้ใช้ในวันนี้
         const ticketCount = await TicketRequest.getTicketCountByDate(today);
+
+        // เพิ่มการดึงข้อมูลสำหรับกราฟ
+        const weeklyLoginData = await UserActivity.getWeeklyLoginCount();
+        const monthlyLoginData = await UserActivity.getMonthlyLoginCount();
         
-        // ส่ง loginCount และ ticketCount ไปที่หน้า report.ejs
-        res.render('report', { loginCount, ticketCount });
+        // แปลงข้อมูลเป็น JSON string ก่อนส่งไปยัง view
+        const weeklyLoginDataJSON = JSON.stringify(weeklyLoginData);
+        const monthlyLoginDataJSON = JSON.stringify(monthlyLoginData);
+        
+        res.render('report', { 
+            loginCount, 
+            ticketCount,
+            weeklyLoginDataJSON,
+            monthlyLoginDataJSON
+        });
+
     } catch (error) {
         console.error('Error fetching user login report:', error);
         res.status(500).send('Server Error');

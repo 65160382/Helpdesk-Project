@@ -6,25 +6,53 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/report.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- เพิ่ม Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Dashboard</title>
 </head>
 <body>
     <%- include('partials/header') %>
     <%- include('partials/sidebar') %>
     <div class="container">
-        <h1>Report</h1>
-    <p>Number of logins today</p>
-    <% if (loginCount !== null) { %>
-        <p>จำนวนการเข้าสู่ระบบของผู้ใช้ในวันนี้: <%= loginCount %></p>
-    <% } else { %>
-        <p>ไม่มีข้อมูลการเข้าสู่ระบบสำหรับวันนี้</p>
-    <% } %>
-    <p>Number of tickets today</p>
-    <% if (ticketCount !== null) { %>
-        <p>จำนวนการส่งคำขอของผู้ใช้ในวันนี้: <%= ticketCount %></p>
-    <% } else { %>
-        <p>ไม่มีข้อมูลการส่งคำขอสำหรับวันนี้</p>
-    <% } %>
+        <h1>Dashboard Report</h1>
+        <div class="cards-grid">
+            <div class="card" style="background-color: #ffffff;">
+                <div class="card-content">
+                    <div class="card-title">จำนวน Login ในวันนี้</div>
+                    <div class="card-value"><%= loginCount || 0 %></div>
+                </div>
+                <div class="card-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+            </div>
+            
+            <div class="card" style="background-color: #ffffff;">
+                <div class="card-content">
+                    <div class="card-title">จำนวน ticket ในวันนี้</div>
+                    <div class="card-value"><%= ticketCount || 0 %></div>
+                </div>
+                <div class="card-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- เพิ่มส่วนแสดงกราฟ -->
+        <div class="chart-container">
+            <canvas id="weeklyChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="monthlyChart"></canvas>
+        </div>
+
+        <!-- ส่งข้อมูลผ่าน data attributes -->
+        <div id="chartData" 
+            data-weekly='<%= weeklyLoginDataJSON %>'
+            data-monthly='<%= monthlyLoginDataJSON %>'>
+        </div>
+        
+        <!-- เรียกใช้ไฟล์ JavaScript แยก -->
+        <script src="/js/reportchart.js"></script>
     </div>
 </body>
 </html>

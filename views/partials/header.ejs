@@ -4,13 +4,23 @@
         <nav class="navbar-dropdown">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                <a href=""  data-toggle="dropdown"> management (admin) <i class="fas fa-chevron-down"></i> </a>               
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/users">User</a>
-                    <a class="dropdown-item" href="/queue">Queue</a>
-                    <a class="dropdown-item" href="/answers">View Question</a>
-                    <a class="dropdown-item" href="/report">Report</a>
-                  </div>
+                    <a href="" data-toggle="dropdown">
+                        <i class="fas fa-cog"></i> management (admin) <i class="fas fa-chevron-down"></i>
+                    </a>               
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/users">
+                            <i class="fas fa-users"></i> User
+                        </a>
+                        <a class="dropdown-item" href="/queue">
+                            <i class="fas fa-tasks"></i> Queue
+                        </a>
+                        <a class="dropdown-item" href="/answers">
+                            <i class="fas fa-question-circle"></i> Q&A
+                        </a>
+                        <a class="dropdown-item" href="/report">
+                            <i class="fas fa-chart-bar"></i> Report
+                        </a>
+                    </div>
                 </li>
             </ul>
         </nav>
@@ -18,10 +28,8 @@
             <ul>
                 <i class="fas fa-user-circle custom-size"></i>
                 <% if (username) { %> 
-                    <!-- แสดงชื่อผู้ใช้เมื่อมีการล็อกอิน -->
                     <li><%= username %></li>
                 <% } else { %> 
-                    <!-- แสดงปุ่ม login ถ้ายังไม่ได้ล็อกอิน -->
                     <li><a href="/login">Login</a></li>
                 <% } %>
             </ul>

@@ -6,3 +6,78 @@
     padding: 20px;
     border-radius: 8px;
 }
+
+h1 {
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #1a202c;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-content {
+    position: relative;
+    z-index: 1;
+}
+
+.card-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #4a5568;
+    margin-bottom: 0.5rem;
+}
+
+.card-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1a202c;
+}
+
+.card-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* กราฟแสดงผล */
+.chart-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 20px 0;
+    width: 100%;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* ปรับขนาดกราฟให้เหมาะสม */
+canvas {
+    max-height: 400px;
+    width: 100% !important;
+}
