@@ -13,7 +13,6 @@ const knowRoutes = require('./routes/knowRoutes');
 const questionRoutes = require('./routes/questionRoutes');
 const answerRouets = require('./routes/answerRoutes');
 const reportRouets = require('./routes/reportRoutes');
-
 const app = express();
 const port = 3000;
 

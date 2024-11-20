@@ -72,6 +72,19 @@ class User {
         return rows;
     }
 
+    
+    static async getStaffIdByUserId(userId) {
+        const sql = `
+        SELECT staff.id AS staff_id 
+        FROM staff 
+        JOIN user_roles ON staff.user_id = user_roles.user_id 
+        JOIN roles ON user_roles.role_id = roles.id 
+        WHERE user_roles.user_id = ? AND roles.role_name = 'staff'
+        `;
+        const [rows] = await pool.execute(sql, [userId]);
+        return rows.length ? rows[0].staff_id : null;
+    }
+
     //ลบ users ที่เลือก 
     static async deleteById(id) {
         const sql = 'DELETE FROM users WHERE id = ?'; // Query เพื่อลบผู้ใช้ตาม id

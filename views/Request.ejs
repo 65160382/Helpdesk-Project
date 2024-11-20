@@ -53,22 +53,22 @@
                         <td><%= queue.description %></td>
                         <td><%= queue.firstname %> <%= queue.lastname %></td>
                         <td><%= queue.priority %></td>
-                        
-                        <td>
-                            <!-- // option อัปเดตสถานะ -->
-                            <form action="/queue/<%= queue.id %>/updateStatus" method="POST">
-                                <select name="status" required>
-                                    <option value="In Progress" <%= queue.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
-                                    <option value="Pending" <%= queue.status === 'Pending' ? 'selected' : '' %>>Pending</option>
-                                    <option value="Resolved" <%= queue.status === 'Resolved' ? 'selected' : '' %>>Resolved</option>
-                                    <option value="Closed" <%= queue.status === 'Closed' ? 'selected' : '' %>>Closed</option>
-                                    <option value="Reopened" <%= queue.status === 'Reopened' ? 'selected' : '' %>>Reopened</option>
-                                    <option value="Escalated" <%= queue.status === 'Escalated' ? 'selected' : '' %>>Escalated</option>
+                        <td><%= queue.status %></td>
+                        <td> 
+                            <!-- // option แสดงรายชื่อ staff -->
+                            <form action="/queue/<%= queue.id %>/assignStaff" method="POST">
+                                <select name="staffId" required>
+                                    <option value="">Select Staff</option>
+                                    <% staffData.forEach(staff => { %>
+                                        <option value="<%= staff.staff_id %>" <%= queue.staff_id === staff.staff_id ? 'selected' : '' %>>
+                                            <%= staff.firstname %> <%= staff.lastname %>
+                                        </option>
+                                    <% }) %>
                                 </select>
-                                <button type="submit" class="button update">Update</button>
+                                <button type="submit" class="button update">Assign</button>
                             </form>
                         </td>
-                        <td><%= queue.staff_firstname %> <%= queue.staff_lastname %></td>
+
                         <td>
                             <!-- // form สำหรับกดปุ่ม delete -->
                             <form action="/queue/<%= queue.id %>/delete" method="POST">

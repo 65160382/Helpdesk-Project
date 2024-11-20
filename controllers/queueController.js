@@ -1,5 +1,6 @@
 const Queue = require("../models/queueModel");
 const User = require('../models/userModel');
+const Ticket = require('../models/ticketModel');
 const StaffQueue = require('../models/staffQueueModel');
 const StaffTicket = require('../models/staffTicketModel');
 
@@ -20,32 +21,60 @@ exports.addToQueue = async (title, description) => {
   }
 };
 
-//เเสดง queue ทั้งหมดพร้อมข้อมูลชื่อผู้ใช้
-exports.getQueueData = async (req, res) => {
+//เเสดง Request ทั้งหมด
+exports.getRequestData = async (req, res) => {
   try {
     const queueData = await Queue.getAll();
     const staffData = await User.getStaff(); // ฟังก์ชันดึงข้อมูล staff
     const sortOption = 'high'; // ตั้งค่าเริ่มต้น
     const user = req.session.user; // ดึงข้อมูลผู้ใช้จาก session // ตรวจสอบว่าผู้ใช้ล็อกอินเข้ามาหรือไม่
 
-
+    
     if (!user) {
       return res.status(401).send("Please log in to access this page.");
     }
 
-    const allowedRoles = ["admin", "staff"]; // กำหนด role ที่อนุญาตให้เข้าถึงได้ // ตรวจสอบว่า role ของผู้ใช้เป็น admin หรือ staff หรือไม่
+    const allowedRoles = ["admin"]; // กำหนด role ที่อนุญาตให้เข้าถึงได้ // ตรวจสอบว่า role ของผู้ใช้เป็น admin หรือ staff หรือไม่
 
     if (!allowedRoles.includes(user.roles)) {
       console.log("Unauthorized access attempt by:", user.username);
       return res.status(403).send("Unauthorized");
     }
 
-    res.render("queue", { queueData,sortOption,staffData  });
+    res.render("Request", { queueData,sortOption,staffData  });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching queue data");
   }
 };
+
+//เเสดง Queue ทั้งหมดที่ staff รับผิดชอบ
+exports.getQueueData = async (req, res) => {
+  try {
+    const user = req.session.user; // Retrieve user data from session
+    
+    if (!user) {
+      return res.status(401).send("Please log in to access this page.");
+    }
+
+    const allowedRoles = ["staff"];
+    if (!allowedRoles.includes(user.roles)) {
+      console.log("Unauthorized access attempt by:", user.username);
+      return res.status(403).send("Unauthorized");
+    }
+
+    const sortOption = 'high'; // Default sort option
+
+    // Retrieve queue data assigned to this staff member
+    const queueData = await Queue.getStaffQueue(user.staff_id);
+
+    res.render("queue", { queueData, sortOption, staffData });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching queue data");
+  }
+};
+
 
 //อัปเดตสถานะ ticket
 exports.updateStatus = async (req, res) => {
@@ -73,7 +102,7 @@ exports.assignStaff = async (req, res) => {
 
       // console.log('Assigning staff - Queue ID:', queueId);
       // console.log('Assigning staff - Staff ID:', staffId);
-      console.log(ticketId);
+      // console.log(ticketId);
 
       // เพิ่มข้อมูล staffId และ queueId ลงในตาราง staff_queue
       await StaffQueue.assignStaffToQueue(queueId, staffId);
@@ -81,7 +110,10 @@ exports.assignStaff = async (req, res) => {
       // บันทึกข้อมูลลงตาราง staff_ticket
       await StaffTicket.assignStaffToTicket(ticketId, staffId);
 
-      res.redirect('/queue');
+      // อัปเดตสถานะในตาราง ticket เป็น "assign"
+      await Ticket.updateStatus(ticketId, ' Assigned');
+
+      res.redirect('/Request');
   } catch (error) {
       console.error('Error in assignStaff:', error);
   }

@@ -26,6 +26,18 @@ class Ticket {
         const [rows] = await pool.execute(sql, [userId]); // ส่งค่า userId เข้าไปในคำสั่ง SQL
         return rows;
     }
+
+    //อัพเดตสถานะหลังจากกำหนด staff 
+    static async updateStatus(ticketId, status) {
+        const sql = `
+            UPDATE ticket
+            SET status = ?
+            WHERE id = ?
+        `;
+        const [result] = await pool.execute(sql, [status, ticketId]);
+        // return result;
+    }
+    
 }
 
 module.exports = Ticket;

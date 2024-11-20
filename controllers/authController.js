@@ -5,7 +5,7 @@ const UserActivity = require('../models/userActivityModel');
 
 // แสดงหน้า Login
 exports.getLoginPage = (req, res) => {
-    res.render('login'); // ใช้ชื่อไฟล์ login.ejs หรือ login.html ใน views
+    res.render('login'); // ใช้ชื่อไฟล์ login.ejs  ใน views
 };
 
 // จัดการการ Login
@@ -39,6 +39,12 @@ exports.login = async (req, res) => {
         roles: user.roles 
     };
 
+    // ตรวจสอบว่า role ของผู้ใช้เป็น staff หรือไม่ หากใช่ ให้ดึง staff_id
+    if (user.roles === 'staff') {
+        const staffId = await User.getStaffIdByUserId(user.id);
+        req.session.user.staff_id = staffId; // เก็บ staff_id ใน session ถ้ามี
+    }
+
     // บันทึกกิจกรรมการเข้าสู่ระบบ
     await UserActivity.recordLogin(user.id);
 
@@ -55,7 +61,7 @@ exports.getRegisterPage = (req, res) => {
     res.render('register'); // ใช้ชื่อไฟล์ register.ejs หรือ register.html ใน views
 };
 
-// จัดการการ Register
+// จัดการ Register
 exports.register = async (req, res) => {
     const { firstname, lastname, email, phone, username, password } = req.body;
 
